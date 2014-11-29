@@ -7,6 +7,8 @@
 
 dir=$(dirname $0)
 
+[ -e "$dir/data.dat" ] && rm $dir/data.dat
+
 for file in `ls htmls`
 do
   echo $file
@@ -27,6 +29,6 @@ do
   sed -e 's/[ ]//g' -e 's/<[^>]*>//g' -e 's/　/,/g' | 
   awk -F, '{print $2}' | 
   grep -o -E "[0-9]+")
-  echo $YEAR,$DATE,$TIME,$PLACE,$WAITING
+  echo $YEAR,$DATE,$TIME,$PLACE,$WAITING >>data.dat
   #echo $PLACE
 done
