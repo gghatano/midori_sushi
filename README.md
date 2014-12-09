@@ -71,8 +71,10 @@ dat_modified %>%
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
-## 赤坂店
 
+赤坂の行列が短そうなので, 赤坂に行きます. 
+
+## 赤坂店
 
 ```r
 dat_modified %>% filter(ID == "Akasaka") %>% 
