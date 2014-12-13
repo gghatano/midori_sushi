@@ -85,13 +85,14 @@ dat_modified %>% filter(ID == "Akasaka") %>%
   geom_line(aes(x=DATE, y=VALUE, colour=HOLIDAY_FLG), size = 1)
 ```
 
-```
-## Warning: Removed 80 rows containing missing values (geom_path).
-```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 15時くらいが良さそうですね!
+
+## 結果
+
+<blockquote class="twitter-tweet" lang="ja"><p>いい寿司だった(1800円)</p>&mdash; はたむ (@gg_hatano) <a href="https://twitter.com/gg_hatano/status/543680533209690112">2014, 12月 13</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 
