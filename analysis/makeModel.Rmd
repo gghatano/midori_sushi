@@ -5,13 +5,9 @@
 
 どこに何時に行けばいいかを調べました. 
 
-[Eparkさんの提供する順番受付システムのWebサイト](http://www.sushinomidori.co.jp/machi.html)を利用しました. 
+10日分くらいの行列長さデータを作りました. 
 
-20分おきにデータを取得, 10日分くらいの行列長さ時系列データを作りました. 
-
-時系列データを, Rでグラフにしてみます. 
-
-```r
+```{r, message=FALSE,warning=FALSE}
 library(data.table)
 library(dplyr)
 library(ggplot2)
@@ -19,8 +15,7 @@ library(ggplot2)
 
 [行列の長さデータ](https://github.com/gghatano/midori_sushi)を可視化します. 
 
-
-```r
+```{r, message=FALSE, warning=FALSE}
 dat = fread("~/works/midori/data.dat.tmp", header=FALSE)
 dat %>% setnames(c("MONTH", "DAY", "HOUR", "MIN", "SHOP", "VALUE"))
 shop_vec = c("Kichijouji", "Shibuya", "Tamagawa", "Akasaka", "Ginza")
@@ -32,20 +27,7 @@ dat_shop =
   mutate(ID = shop_vec) %>% 
   select(-TMP)
 dat_shop
-```
 
-```
-## Source: local data table [5 x 2]
-## 
-##             SHOP         ID
-## 1 アトレ吉祥寺店 Kichijouji
-## 2         渋谷店    Shibuya
-## 3         玉川店   Tamagawa
-## 4         赤坂店    Akasaka
-## 5         銀座店      Ginza
-```
-
-```r
 dat_holiday = 
   dat %>% select(MONTH,DAY) %>% 
   group_by(MONTH,DAY) %>%
@@ -64,22 +46,16 @@ dat_modified =
 ```
 
 ## 系列5店舗の様子
-
-```r
+```{r, message=FALSE, warning=FALSE}
 dat_modified %>% 
   ggplot() +
   facet_wrap(~ID, nrow=5) +
   geom_line(aes(x=DATE, y=VALUE, colour=HOLIDAY_FLG), size = 1)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
-
-
-赤坂の行列が短そうなので, 赤坂に行きます. 
-
 ## 赤坂店
 
-```r
+```{r}
 dat_modified %>% filter(ID == "Akasaka") %>% 
   filter(MONTH == 12, DAY == 6) %>% 
   ggplot() +
@@ -87,14 +63,7 @@ dat_modified %>% filter(ID == "Akasaka") %>%
   geom_line(aes(x=DATE, y=VALUE, colour=HOLIDAY_FLG), size = 1)
 ```
 
-
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
-
 15時くらいが良さそうですね!
-
-## 結果
-
-<blockquote class="twitter-tweet" lang="ja"><p>いい寿司だった(1800円)</p>&mdash; はたむ (@gg_hatano) <a href="https://twitter.com/gg_hatano/status/543680533209690112">2014, 12月 13</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 

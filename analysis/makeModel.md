@@ -5,11 +5,8 @@
 
 どこに何時に行けばいいかを調べました. 
 
-[Eparkさんの提供する順番受付システムのWebサイト](http://www.sushinomidori.co.jp/machi.html)を利用しました. 
+10日分くらいの行列長さデータを作りました. 
 
-20分おきにデータを取得, 10日分くらいの行列長さ時系列データを作りました. 
-
-時系列データを, Rでグラフにしてみます. 
 
 ```r
 library(data.table)
@@ -74,10 +71,8 @@ dat_modified %>%
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
-
-赤坂の行列が短そうなので, 赤坂に行きます. 
-
 ## 赤坂店
+
 
 ```r
 dat_modified %>% filter(ID == "Akasaka") %>% 
@@ -87,14 +82,13 @@ dat_modified %>% filter(ID == "Akasaka") %>%
   geom_line(aes(x=DATE, y=VALUE, colour=HOLIDAY_FLG), size = 1)
 ```
 
+```
+## Warning: Removed 80 rows containing missing values (geom_path).
+```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 15時くらいが良さそうですね!
-
-## 結果
-
-<blockquote class="twitter-tweet" lang="ja"><p>いい寿司だった(1800円)</p>&mdash; はたむ (@gg_hatano) <a href="https://twitter.com/gg_hatano/status/543680533209690112">2014, 12月 13</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 
